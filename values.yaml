@@ -4,7 +4,7 @@ practicecluster:
   containers:
     config:
       cname: configserver
-      replicas: 1
+      replicas: 3
       cimage: nginx:latest
       cport: 80
       service:
