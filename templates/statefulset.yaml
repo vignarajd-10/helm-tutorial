@@ -37,14 +37,14 @@ spec:
           image: {{ $container.cimage }}
           ports:
             - containerPort: {{ $container.cport }}
-          volumeMounts:
-            - mountPath: "/usr/local/ofs/log/"
-              name: logs
+          # volumeMounts:
+          #   - mountPath: "/usr/local/ofs/log/"
+          #     name: logs
           resources: {{- toYaml $container.resources | nindent 12}}
       restartPolicy: Always
       terminationGracePeriodSeconds: 100
-  volumeClaimTemplates:
-    - metadata:
-        name: logs
+  # volumeClaimTemplates:
+  #   - metadata:
+  #       name: logs
 
 {{ end }}

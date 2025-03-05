@@ -1,20 +1,20 @@
-{{- $root := . -}}
+# {{- $root := . -}}
 
-{{ range $container := .Values.practicecluster.containers }}
-{{ $repCount := $container.replicas | int }}
-{{ range $i := until $repCount }}
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: logs-{{ $container.cname }}-{{ $i }}
-  namespace: {{ $root.Values.namespace }}
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: azurefile
-  resources:
-    requests:
-      storage: 100Mi
-{{ end }}
-{{ end }}
+# {{ range $container := .Values.practicecluster.containers }}
+# {{ $repCount := $container.replicas | int }}
+# {{ range $i := until $repCount }}
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: logs-{{ $container.cname }}-{{ $i }}
+#   namespace: {{ $root.Values.namespace }}
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: azurefile
+#   resources:
+#     requests:
+#       storage: 100Mi
+# {{ end }}
+# {{ end }}
