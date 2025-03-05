@@ -1,0 +1,4 @@
+apiVersion: v2
+name: helm-tutorial
+description: A Helm Tutorial for Practice
+version: 0.0.1

@@ -1,0 +1,50 @@
+{{ $root := .  -}}
+
+{{ range $container := .Values.practicecluster.containers }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ $container.cname }}
+  namespace: {{ $root.namespace }}
+  labels:
+    {{- include "service_tag" $container.cname | nindent 4 }}
+
+spec:
+  serviceName: {{ $container.cname }}
+  replicas: {{ $container.replicas }}
+  selector:
+    matchLabels:
+      {{- include "service_tag" $container.cname | nindent 6}}
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        {{- include "service_tag" $container.cname | nindent 8}}
+    spec:
+      {{ if gt (int $container.replicas) 1}}
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              {{- include "service_tag" $container.cname | nindent 14}}
+      {{ end }}
+      containers:
+        - name: "{{ $container.cname }}-nginx"
+          image: {{ $container.cimage }}
+          ports:
+            - containerPort: {{ $container.cport }}
+          volumeMounts:
+            - mountPath: "/usr/local/ofs/log/"
+              name: logs
+          resources: {{- toYaml $container.resources | nindent 12}}
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 100
+  volumeClaimTemplates:
+    - metadata:
+        name: logs
+
+{{ end }}

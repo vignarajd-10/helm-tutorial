@@ -1,0 +1,20 @@
+{{ $root := . -}}
+
+{{ range $container := .Values.practicecluster.containers }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ $container.cname }}-svc"
+  namespace: {{ $container.namespace }}
+  labels:
+    {{- include "service_tag" $container.cname | nindent 4}}
+  
+spec:
+  ports:
+    - port: {{ $container.service.port }}
+      targetPort: {{ $container.service.targetPort }}
+      name: {{ $container.service.name }}
+  selector:
+    {{- include "service_tag" $container.cname | nindent 4}}
+{{ end }}

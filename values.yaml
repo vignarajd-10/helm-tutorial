@@ -1,0 +1,71 @@
+namespace: vignaraj
+
+practicecluster:
+  containers:
+    # config:
+    #   cname: configserver
+    #   replicas: 1
+    #   cimage: nginx:latest
+    #   cport: 80
+    #   service:
+    #     name: http
+    #     port: 8080
+    #     targetPort: 80
+    #   resources:
+    #     requests:
+    #       cpu: "25m"
+    #       memory: "100Mi"
+    #     limits:
+    #       cpu: "50m"
+    #       memory: "200Mi"
+    
+    process:
+      cname: processserver
+      replicas: 1
+      cimage: vignaraj1018/python-web-app-demo:v1
+      cport: 8000
+      service:
+        name: http
+        port: 8080
+        targetPort: 8000
+      resources:
+        requests:
+          cpu: "25m"
+          memory: "100Mi"
+        limits:
+          cpu: "50m"
+          memory: "200Mi"
+    
+    # api:
+    #   cname: apiserver
+    #   replicas: 2
+    #   cimage: nginx:latest
+    #   cport: 80
+    #   service:
+    #     name: http
+    #     port: 8080
+    #     targetPort: 80
+    #   resources:
+    #     requests:
+    #       cpu: "25m"
+    #       memory: "100Mi"
+    #     limits:
+    #       cpu: "50m"
+    #       memory: "200Mi"
+    
+    # task:
+    #   cname: taskserver
+    #   replicas: 3
+    #   cimage: nginx:latest
+    #   cport: 80
+    #   service:
+    #     name: http
+    #     port: 8080
+    #     targetPort: 80
+    #   resources:
+    #     requests:
+    #       cpu: "25m"
+    #       memory: "100Mi"
+    #     limits:
+    #       cpu: "50m"
+    #       memory: "200Mi"
