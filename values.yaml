@@ -21,7 +21,7 @@ practicecluster:
     
     process:
       cname: processserver
-      replicas: 2
+      replicas: 1
       cimage: vignaraj1018/python-web-app-demo:v1
       cport: 8000
       service:
@@ -38,7 +38,7 @@ practicecluster:
     
     api:
       cname: apiserver
-      replicas: 2
+      replicas: 1
       cimage: nginx:latest
       cport: 80
       service:
@@ -55,7 +55,7 @@ practicecluster:
     
     task:
       cname: taskserver
-      replicas: 3
+      replicas: 1
       cimage: nginx:latest
       cport: 80
       service:
