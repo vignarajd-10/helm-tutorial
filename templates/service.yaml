@@ -6,7 +6,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: "{{ $container.cname }}-svc"
-  namespace: {{ $container.namespace }}
+  namespace: {{ $root.namespace }}
   labels:
     {{- include "service_tag" $container.cname | nindent 4}}
   
