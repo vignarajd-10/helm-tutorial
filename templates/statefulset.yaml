@@ -23,15 +23,15 @@ spec:
       labels:
         {{- include "service_tag" $container.cname | nindent 8}}
     spec:
-      {{ if gt (int $container.replicas) 1}}
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: topology.kubernetes.io/zone
-          whenUnsatisfiable: ScheduleAnyway
-          labelSelector:
-            matchLabels:
-              {{- include "service_tag" $container.cname | nindent 14}}
-      {{ end }}
+      # {{ if gt (int $container.replicas) 1}}
+      # topologySpreadConstraints:
+      #   - maxSkew: 1
+      #     topologyKey: topology.kubernetes.io/zone
+      #     whenUnsatisfiable: ScheduleAnyway
+      #     labelSelector:
+      #       matchLabels:
+      #         {{- include "service_tag" $container.cname | nindent 14}}
+      # {{ end }}
       containers:
         - name: "{{ $container.cname }}-nginx"
           image: {{ $container.cimage }}
